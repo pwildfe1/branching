@@ -251,8 +251,8 @@ def modifyDataPts(lines,info,sd,depth):
                 z = info[i][j][2]
             newPts.append(vecAdd(pt,[0,0,z]))
         newCrvs.append(newPts)
+        rs.AddCurve(newPts)
         newPts = []
-    rs.AddCurve(newCrvs[int(len(newCrvs)/2)])
 
 
 def Main():
@@ -262,11 +262,12 @@ def Main():
     gen = 8
     vec = [0,1,0]
     vec = vecScale(vec,length);
+    rs.EnableRedraw(False)
     tree = vine(start,vec,ang)
     for i in range(gen):
         tree.grow()
     library = readData(f,'N')
-    modifyDataPts(tree.convertToEq(),library,20,10)
+    modifyDataPts(tree.convertToEq(),library,50,20)
 
 f = open('curves.csv','r')
 
